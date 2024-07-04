@@ -151,6 +151,7 @@
     bat
     manix
     home-manager
+    alejandra
   ];
 
   xdg.portal.enable = true;
