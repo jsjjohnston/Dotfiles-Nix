@@ -56,14 +56,14 @@
   };
 
   hardware = {
-    opengl.enable = true;
+    graphics.enable = true;
     nvidia.modesetting.enable = true;
   };
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
