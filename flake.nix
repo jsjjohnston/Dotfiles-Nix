@@ -10,27 +10,27 @@
     nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: 
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      
+
       config = {
         allowUnfree = true;
       };
     };
-   in
-   {
-
+  in {
     nixosConfigurations = {
-      		nixos = nixpkgs.lib.nixosSystem {
-			specialArgs = { inherit inputs system; };
-                        modules = [
-                          ./configuration.nix
-                        ];
-		};
-    	};
-
+      nixos = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs system;};
+        modules = [
+          ./configuration.nix
+        ];
+      };
     };
+  };
 }

@@ -1,7 +1,9 @@
-{ config, pkgs, inputs, ... }:
-
 {
-
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.nix-colors.homeManagerModules.default
   ];

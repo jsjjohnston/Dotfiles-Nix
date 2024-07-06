@@ -1,15 +1,17 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ inputs, config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
-    ];
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -72,11 +74,11 @@
   programs.starship = {
     enable = true;
     settings = {
-       add_newline = false;
+      add_newline = false;
     };
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -101,36 +103,35 @@
   users.users.jay = {
     isNormalUser = true;
     description = "Jay Johnston";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
   home-manager = {
-     extraSpecialArgs = { inherit inputs; };
-     users = {
-       "jay" = import ./home.nix;
-     };
+    extraSpecialArgs = {inherit inputs;};
+    users = {
+      "jay" = import ./home.nix;
+    };
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
-     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
   ];
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget  
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
     eww
     waybar
     dunst
@@ -152,10 +153,11 @@
     manix
     home-manager
     alejandra
+    fzf
   ];
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -185,22 +187,20 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   system.autoUpgrade = {
-   enable = true;
-   dates = "18:00";
-   #flake = inputs.self.outPath;
-   flags = [
-     "--update-input"
-     "nixpkgs"
-     "-L"
-   ];
-   randomizedDelaySec = "45min";
+    enable = true;
+    dates = "18:00";
+    #flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "-L"
+    ];
+    randomizedDelaySec = "45min";
   };
 
- nix.gc = {
+  nix.gc = {
     automatic = true;
     dates = "daily";
     options = "--delete-older-then 3d";
   };
 }
-
-
