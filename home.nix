@@ -25,6 +25,18 @@
 
   programs.neovim = {
     enable = true;
+
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    defaultEditor = true;
+    plugins = with pkgs.vimPlugins; [
+      vim-nix
+    ];
+    #extraLuaConfig = ''
+    #  ${builtins.readFile ./nvim/init.lua}
+    #'';
   };
 
   # The home.packages option allows you to install Nix packages into your
@@ -54,7 +66,7 @@
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
-    ".config/nvim".source = "/home/jay/.dotfiles/nvim";
+    # ".config/nvim".source = "./nvim";
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
