@@ -23,7 +23,8 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  programs.neovim = let
+  programs.neovim = 
+  let
     toLua = str: "lua << EOF\n${str}\n\EOF\n";
     toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
   in {
