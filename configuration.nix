@@ -154,7 +154,6 @@
     home-manager
     alejandra
     fzf
-    neovim
   ];
 
   xdg.portal.enable = true;
