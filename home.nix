@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  inputs,
+  #inputs,
   ...
 }: {
   imports = [
@@ -12,7 +12,7 @@
   home.username = "jay";
   home.homeDirectory = "/home/jay";
 
-  colorScheme = inputs.nix-colors.colorSchemes.dracula;
+  #colorScheme = inputs.nix-colors.colorSchemes.dracula;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -23,29 +23,29 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  programs.neovim = let
-    toLua = str: "lua << EOF\n${str}\n\EOF\n";
-    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-  in {
-    enable = true;
+  #programs.neovim = let
+  #  toLua = str: "lua << EOF\n${str}\n\EOF\n";
+  #  toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  #in {
+  #  enable = true;
 
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+  #  viAlias = true;
+  #  vimAlias = true;
+  #  vimdiffAlias = true;
 
-    defaultEditor = true;
-    plugins = with pkgs.vimPlugins; [
-      vim-nix
+  #  defaultEditor = true;
+  #  plugins = with pkgs.vimPlugins; [
+  #    vim-nix
 
-      {
-        plugin = cyberdream-nvim;
-        config = toLuaFile ./nvim/lua/kickstart/plugins/colorscheme.lua;
-      }
-    ];
+  #    {
+  #      plugin = cyberdream-nvim;
+  #      config = toLuaFile ./nvim/lua/kickstart/plugins/colorscheme.lua;
+  #    }
+  #  ];
     #extraLuaConfig = ''
     #  ${builtins.readFile ./nvim/init.lua}
     #'';
-  };
+  #};
 
   # The home.packages option allows you to install Nix packages into your
   # environment.

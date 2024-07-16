@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  inputs,
+  #inputs,
   config,
   pkgs,
   ...
@@ -10,7 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.home-manager
+    #inputs.home-manager.nixosModules.home-manager
   ];
 
   # Bootloader.
@@ -18,7 +18,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -57,10 +57,10 @@
     xwayland.enable = true;
   };
 
-  hardware = {
-    graphics.enable = true;
-    nvidia.modesetting.enable = true;
-  };
+  #hardware = {
+  #  graphics.enable = true;
+  #  nvidia.modesetting.enable = true;
+  #};
 
   # Configure keymap in X11
   services.xserver = {
@@ -109,12 +109,12 @@
     ];
   };
 
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "jay" = import ./home.nix;
-    };
-  };
+  #home-manager = {
+  #  extraSpecialArgs = {inherit inputs;};
+  #  users = {
+  #    "jay" = import ./home.nix;
+  #  };
+  #};
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -154,6 +154,7 @@
     home-manager
     alejandra
     fzf
+    neovim
   ];
 
   xdg.portal.enable = true;
@@ -198,6 +199,8 @@
     randomizedDelaySec = "45min";
   };
 
+  nix.settings.auto-optimise-store = true;
+ 
   nix.gc = {
     automatic = true;
     dates = "daily";
